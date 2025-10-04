@@ -127,39 +127,67 @@ print(swapped)
 
 #Write a function reverse_string() that takes a string my_str as a parameter and returns the string reversed.
 '''
-def reverse_string(my_str):
-    reverse = ""
-    #return my_str[::-1]
-    for i in range(len(my_str) - 1, -1, -1):
-        reverse = reverse + my_str[i]
-    return reverse
 
+## Understand
+# ask 
+    # what if the input is empty
+    # what if the string is a single char strin? 
+#edge case
+    #my_str([])=[]
+    #my_stre([l])=l
+    
+#plan
+    # pseudo
+    # funtion reverser string (my_str)
+    # return my_str from end to start in steps of -1
+    # : : -1 
+    # so what is : ? so depends on -1 or 1 it will go from start to end or end to start 
+def reverse_string(my_str):
+    return my_str[::-1]
 #Example Usage:
 
 my_str = "live"
 print(reverse_string(my_str))
 
 #Example Output: evil
+
+
+
+
 '''
 
 ###Problem 5: First Unique
 
 ###Write a function first_unique_char() that given a string my_str as a parameter, it finds the first non-repeating character in it and returns its index. If it does not exist, then return -1.
 '''
+### Understand
+# what is the question asking? 
+# answer: to find the first non-repeating character in a string and return its index
+
+# break down the problem
+# 1. create a dictionary to store the count of each character in the string
+    # meaning if we see a char we add it to the dict and set its count to 1
+    # if we see the char again we increment its count by 1
+# 2. iterate through the string and check the count of each character in the dictionary
+    # if the count is 1 we return the index of that character
+    # if we finish iterating through the string and do not find any character with count 1 we return -1
+### Implementation
+
+
 def first_unique_char(my_str):
     count = {}
     for char in my_str:
-        if char in count:
-            count[char] += 1
-        else:
-            count[char] = 1
-
-    for key in count:
-        if count[key] == 1:
-            return my_str.find(key)
-    else:
-        return -1
-    pass
+        # count.get(char,0) returns the count of char if it exists in the dic else it returns 0
+        # the method is count.get(key, default)
+        count[char] = count.get(char, 0) + 1
+    # iterate through the string again to find the first unique character
+    # we use enumerate to get the index and the character
+    # enumerate returns a tuple of (index, character)
+    #
+    for i, char in enumerate(my_str):
+        if count[char] == 1: # if the count of the character is 1 we return its index
+            return i
+    return -1 # if we do not find any unique character we return -1
 
 #Example Usage:
 
